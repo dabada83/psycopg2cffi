@@ -49,6 +49,9 @@ class Error(StandardError):
         self.pgerror = state.get('pgerror')
         self.pgcode = state.get('pgcode')
 
+    def __str__(self):
+        return unicode(self.message).encode('utf-8')
+
 
 class InterfaceError(Error):
     pass
@@ -171,4 +174,3 @@ class Diagnostics(object):
     @property
     def source_function(self):
         return self._get_field(libpq.LIBPQ_DIAG_SOURCE_FUNCTION)
-
